@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"boostapp5e3171a8": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

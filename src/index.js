@@ -1,4 +1,6 @@
 /* eslint-disable global-require */
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
 import './assets/css/vendor/bootstrap.min.css';
 import './assets/css/vendor/bootstrap.rtl.only.min.css';
 import 'react-circular-progressbar/dist/styles.css';
@@ -13,7 +15,10 @@ import {
 } from './constants/defaultValues';
 import { getCurrentColor, setCurrentColor } from './helpers/Utils';
 
-const color = (isMultiColorActive || isDarkSwitchActive) ? getCurrentColor() : defaultColor;
+Amplify.configure(config);
+
+const color =
+  isMultiColorActive || isDarkSwitchActive ? getCurrentColor() : defaultColor;
 setCurrentColor(color);
 
 const render = () => {

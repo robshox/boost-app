@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,11 +9,11 @@ import {
 } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import AppLocale from './lang';
+
 import ColorSwitcher from './components/common/ColorSwitcher';
 import { NotificationContainer } from './components/common/react-notifications';
 import { isMultiColorActive, adminRoot } from './constants/defaultValues';
 import { getDirection } from './helpers/Utils';
-
 
 const ViewHome = React.lazy(() =>
   import(/* webpackChunkName: "views" */ './views/home')
@@ -54,7 +55,7 @@ class App extends React.Component {
             <Suspense fallback={<div className="loading" />}>
               <Router>
                 <Switch>
-                <Route
+                  <Route
                     path={adminRoot}
                     render={(props) => <ViewApp {...props} />}
                   />
@@ -89,4 +90,6 @@ const mapStateToProps = ({ settings }) => {
 };
 const mapActionsToProps = {};
 
-export default connect(mapStateToProps, mapActionsToProps)(App);
+export default withAuthenticator(
+  connect(mapStateToProps, mapActionsToProps)(App)
+);
